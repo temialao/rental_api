@@ -52,6 +52,11 @@ router.get('/:id', async (req, res) => {
   res.send(user)
 })
 
+router.get('/:id/rents', async (req, res) => {
+  const rents = await db('rents').where('user_id', req.params.id)
+  res.send(rents)
+})
+
 router.post('/', async (req, res) => {
   try {
     await userSchema.validateAsync(req.body)
@@ -68,6 +73,17 @@ router.post('/', async (req, res) => {
   } catch (error) {
     res.status(400).send({ error: error.message })
   }
+})
+
+router.delete('/:id', async (req, res) => {
+  const user = await db('users').where('id', req.params.id).first()
+  if (!user) {
+    res.status(404).send({ error: 'User not found' })
+    return
+  }
+
+  await db('users').where('id', req.params.id).delete()
+  res.send({ message: 'User deleted' })
 })
 
 module.exports = router

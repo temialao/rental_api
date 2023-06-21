@@ -4,8 +4,9 @@ CREATE TABLE cars (
     maker TEXT,
     model TEXT, 
     added_at DATETIME DEFAULT CURRENT_TIMESTAMP, 
-    manufactured_at TEXT, 
-    milage NUMERIC
+    manufactured_at DATETIME, 
+    milage INTEGER,
+    available BOOLEAN DEFAULT 1
 );
 
 -- rents definition
@@ -13,9 +14,9 @@ CREATE TABLE rents (
     id INTEGER PRIMARY KEY AUTOINCREMENT,
     car_id INTEGER,
     user_id INTEGER,
-    rented_at TEXT DEFAULT (null),
-    returned_at TEXT DEFAULT (null),
-    milage_done NUMERIC DEFAULT 0
+    rented_at DATETIME DEFAULT (null),
+    returned_at DATETIME DEFAULT (null),
+    milage_done INTEGER DEFAULT (null),
 );
 
 -- users definition
@@ -23,7 +24,7 @@ CREATE TABLE users (
     id INTEGER PRIMARY KEY AUTOINCREMENT,
     email TEXT,
     name TEXT,
-    dob TEXT
+    dob DATETIME
 );
 
 -- Seed cars table

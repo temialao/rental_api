@@ -8,22 +8,35 @@ This project is a Car Rental API developed with Node.js, Express, and SQLite. Th
 
 To the existing endpoints, I have added the following:
 
-- **GET /rents**: Retrieve all rents.
-- **POST /rents**: Start a new rent. Requires a body with `car_id`, `user_id` and `rented_at` properties.
-- **PUT /rents/:id**: End an existing rent. Requires a body with `new_milage` and `returned_at` properties.
+- **GET /rents**: Retrieve all rents
+- **GET /rents/:id**: Retrieve a rent by its `id`
+- **POST /rents**: Start a new rent. Requires a body with `car_id`, `user_id` and `rented_at` properties
+- **PUT /rents/:id**: End an existing rent. Requires a body with `new_milage` and `returned_at` properties
+- **DELETE /rents/:id**: Delete a rent by it's `id`
+- **GET /cars/:id/rents**: Retrieve all rents associated with a specific car
+- **PATCH /cars/:id**: Update specific field(s) in a `cars` record
+- **DELETE /cars/:id**: Delete a car by it's `id`
+- **GET /users/:id/rents**: Retrieve all rents associated with a specific user
+- **DELETE /users/:id**: Delete a user by their `id`
 
-The milage data is stored in a new column in the `rents` table which is titled `milage_done`. I have also added an auto-incremented `id` column to the `rents` table.
+## Database Changes
+
+I have made the following changes to the database:
+
+- The milage data is stored in a new column in the `rents` table which is titled `milage_done`
+- The `rents` table now includes an auto-incremented `id` column
+- The `cars` table now includes a column titled `available` which stores a boolean indicating whether or not the car is available for rent
 
 ## Setup Instructions
 
-### Installation Instructions
+### Installation
 
 1. Clone or extract the repository to your local machine.
 2. Navigate into the project directory.
 3. Run `npm install` to install all necessary dependencies.
 4. Follow the instructions provided in the Database Setup section of this README to set up your SQLite database.
 
-### Database Creation and Seeding
+### Database Setup
 
 To create and seed the database, follow these steps:
 
@@ -40,6 +53,7 @@ To create and seed the database, follow these steps:
    ```
 
 3. Run the following command to create and seed the database:
+
    ```
    sqlite3 db.sqlite < ddl.sql
    ```
